@@ -116,19 +116,22 @@ body{
 }
 
 .yes{
-  position: absolute;
-  top: 30px;
-  right: 55%;
+  position: relative;
+  right: 5%;
+}
+
+.no{
+  position: relative;
+  left: 5%;
+}
+.yes{
   background: white;
   color: #ff2f7d;
 }
 
 .no{
-  top: 30px;
-  left: 55%;
   background: rgba(0,0,0,0.35);
   color: white;
-  position: absolute;
 }
 
 .next{
@@ -167,7 +170,10 @@ body{
 }
 
 .final-buttons{
+  position: relative;
   margin-top: 18px;
+  gap: 12px;
+  justify-content: center;  
 }
 
 .forever-text{
