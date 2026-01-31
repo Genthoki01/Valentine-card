@@ -1,177 +1,197 @@
-// ---------- Helpers ----------
-const $ = (id) => document.getElementById(id);
-
-function showPage(pageId) {
-  document.querySelectorAll(".page").forEach((p) => p.classList.remove("active"));
-  $(pageId).classList.add("active");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-function setTheme(themeClass) {
-  const app = $("app");
-  app.classList.remove("theme-black", "theme-vibrant");
-  app.classList.add(themeClass);
+body {
+  height: 100vh;
+  overflow: hidden;
 }
 
-// ---------- Elements ----------
-const yesBtn = $("yesBtn");
-const noBtn = $("noBtn");
-const btnArea = $("btnArea");
+/* 💗 Hearts background layer (BEHIND the card) */
+#heartsLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
 
-const message = $("message");
-const nextBtn = $("nextBtn");
+/* each heart */
+.bg-heart {
+  position: absolute;
+  bottom: -30px;
+  opacity: 0.9;
+  animation: floatUp 6s linear forwards;
+}
 
-const giftBtn = $("giftBtn");
-const giftBox = $("giftBox");
-const openLetterBtn = $("openLetterBtn");
-
-const letterText = $("letterText");
-const foreverYes = $("foreverYes");
-const finalButtons = $("finalButtons");
-
-const heartsLayer = $("heartsLayer");
-
-// ---------- Pages content ----------
-let pageIndex = 0;
-
-const lovePages = [
-  "I love you so much 💖<br>You mean the world to me 🥺✨",
-  "You make me feel safe, happy, and loved 💕<br>Thank you for being you 😘",
-  "No matter what happens, I’ll always choose you 💗<br>You’re my favorite person 🫶",
-  "Happy Valentine’s Day my love 💝<br>I love you forever ♾️<br>My Gorgeous Man 💖"
-];
-
-// ✅ Updated Love Letter (To My Babe Rajat 💖 + emojis)
-const loveLetter = `
-To My Babe Rajat 💖<br><br>
-
-I don’t even know where to start because there are so many things I want to say, and none of them feel big enough to explain how much you mean to me 🥺💗 But I’ll try, because you deserve to know 😘<br><br>
-
-You’ve become one of the most beautiful parts of my life 💕 In the way you make me smile without trying 😊✨, in the way you make me feel safe even when everything else feels messy 🤍, and in the way you always manage to bring light into my darkest days 🌙💖. Loving you feels like home 🏡💞 warm, comforting, and real 💗<br><br>
-
-I love the little things about you the most 🥰 The way you talk 💬, the way you laugh 😆💖, the way you look at me like I’m someone worth loving 🥺💘. You make me feel special in a way I never thought I could feel 💞 and I’m so grateful for you 🌸✨<br><br>
-
-Thank you for being patient with me 🤍, for caring about me 💕, for choosing me even on the days I don’t feel like I deserve it 🥺💗. Thank you for being the kind of person who makes love feel gentle, not scary 🫶💖<br><br>
-
-I want you to know that I’m proud of you 😘✨ For everything you’ve done 💪, everything you’re doing 🌟, and everything you’re becoming 💖. I believe in you more than words can say 🥺💞 and I’ll always be here cheering you on 📣💕<br><br>
-
-No matter what happens, I want you in my life 💗 I want to make memories with you 📸💞, laugh with you 😆💕, grow with you 🌱💖, and love you in every season 🍂🌸☀️❄️. You are not just someone I love… you are someone I want a future with 💍💖<br><br>
-
-I love you more than you’ll ever fully understand 🥺💘 and I’ll keep loving you today, tomorrow, and always ♾️💖<br><br>
-
-Forever yours 💕✨
-`;
-
-// ---------- NO button dodge (NEVER overlaps YES) ----------
-function dodgeNoButton() {
-  const padding = 10;
-
-  const areaRect = btnArea.getBoundingClientRect();
-  const btnRect = noBtn.getBoundingClientRect();
-  const yesRect = yesBtn.getBoundingClientRect();
-
-  const maxX = areaRect.width - btnRect.width - padding;
-  const maxY = areaRect.height - btnRect.height - padding;
-
-  // Try many times to find a safe spot
-  for (let i = 0; i < 60; i++) {
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    const newLeft = Math.max(padding, x);
-    const newTop = Math.max(padding, y);
-
-    // Future NO button position rectangle
-    const noFuture = {
-      left: areaRect.left + newLeft,
-      top: areaRect.top + newTop,
-      right: areaRect.left + newLeft + btnRect.width,
-      bottom: areaRect.top + newTop + btnRect.height
-    };
-
-    // Check overlap with YES button
-    const overlap =
-      !(noFuture.right < yesRect.left ||
-        noFuture.left > yesRect.right ||
-        noFuture.bottom < yesRect.top ||
-        noFuture.top > yesRect.bottom);
-
-    if (!overlap) {
-      noBtn.style.left = newLeft + "px";
-      noBtn.style.top = newTop + "px";
-      return;
-    }
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
   }
 
-  // fallback
-  noBtn.style.left = padding + "px";
-  noBtn.style.top = (areaRect.height - btnRect.height - padding) + "px";
-}
-
-noBtn.addEventListener("mouseenter", dodgeNoButton);
-noBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  dodgeNoButton();
-});
-
-// ---------- YES (page 1 -> page 2) ----------
-yesBtn.addEventListener("click", () => {
-  setTheme("theme-vibrant");
-  showPage("page2");
-
-  pageIndex = 0;
-  message.innerHTML = lovePages[pageIndex];
-  nextBtn.textContent = "Next 💌";
-});
-
-// ---------- NEXT (page 2 -> page 3) ----------
-nextBtn.addEventListener("click", () => {
-  pageIndex++;
-
-  if (pageIndex < lovePages.length) {
-    message.innerHTML = lovePages[pageIndex];
-
-    if (pageIndex === lovePages.length - 1) {
-      nextBtn.textContent = "Finish 💘";
-    }
-  } else {
-    showPage("page3");
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
   }
-});
-
-// ---------- Gift ----------
-giftBtn.addEventListener("click", () => {
-  giftBtn.classList.add("hidden");
-  giftBox.classList.remove("hidden");
-});
-
-// ---------- Open Letter ----------
-openLetterBtn.addEventListener("click", () => {
-  showPage("page4");
-  letterText.innerHTML = loveLetter;
-});
-
-// ---------- Forever YES (buttons disappear + background black) ----------
-foreverYes.addEventListener("click", () => {
-  finalButtons.classList.add("hidden"); // hide buttons
-  setTheme("theme-black");              // black background
-  showPage("page5");
-});
-
-// ---------- Floating Hearts (UNDER card) ----------
-function createBgHeart() {
-  const heart = document.createElement("div");
-  heart.className = "bg-heart";
-
-  const hearts = ["💗", "💖", "💕", "💘", "💞"];
-  heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 20 + 14 + "px";
-  heart.style.animationDuration = Math.random() * 2 + 4 + "s";
-
-  heartsLayer.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 6500);
 }
 
-setInterval(createBgHeart, 180);
+/* App wrapper */
+#app {
+  position: relative;
+  z-index: 2; /* ABOVE hearts */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Background theme */
+.theme-black {
+  background: black;
+  color: white;
+}
+
+/* Pages */
+.page {
+  display: none;
+  width: 100%;
+  max-width: 540px;
+}
+
+.page.active {
+  display: block;
+}
+
+/* Card (kept above hearts) */
+.card {
+  position: relative;
+  z-index: 10;
+  border-radius: 22px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0px 0px 50px rgba(255, 105, 180, 0.25);
+}
+
+/* ✅ Vibrant card design (your request) */
+.card-vibrant {
+  background: linear-gradient(135deg, rgba(255, 105, 180, 0.85), rgba(255, 0, 128, 0.55));
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+/* Titles */
+.title {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: white;
+}
+
+#question {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: white;
+}
+
+/* Message */
+.message {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin: 15px 0 20px;
+  color: white;
+}
+
+/* Buttons */
+.btn {
+  font-size: 1.1rem;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.yes {
+  background: white;
+  color: #ff2f7d;
+  font-weight: bold;
+}
+
+.no {
+  background: #222;
+  color: white;
+  position: absolute;
+  left: 160px;
+  top: 0;
+}
+
+.next {
+  background: #ff2f7d;
+  color: white;
+  font-weight: bold;
+}
+
+.gift {
+  background: #ff006a;
+  color: white;
+  font-weight: bold;
+}
+
+/* Button area (NO button stays inside) */
+.btn-area {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Gift box */
+.hidden {
+  display: none;
+}
+
+.gift-box {
+  margin-top: 20px;
+}
+
+.gift-emoji {
+  font-size: 90px;
+  margin: 10px 0;
+}
+
+/* Love letter */
+.letter-card {
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.letter-text {
+  text-align: left;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-top: 12px;
+  color: white;
+}
+
+/* Final Buttons */
+.final-buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.forever-text {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  color: #ffe3f1;
+}
