@@ -10,7 +10,7 @@ body {
   overflow: hidden;
 }
 
-/* 💗 Hearts background layer (BEHIND the card) */
+/* 💗 Hearts background layer (BEHIND EVERYTHING) */
 #heartsLayer {
   position: fixed;
   inset: 0;
@@ -50,51 +50,51 @@ body {
   padding: 20px;
 }
 
-/* Background theme */
+/* Themes */
 .theme-black {
   background: black;
-  color: black;
+  color: pink;
+}
+
+.theme-vibrant {
+  background: radial-gradient(circle at top, #ffb6c1, #ff4d88, #2b0014);
+  color: white;
 }
 
 /* Pages */
 .page {
   display: none;
   width: 100%;
-  max-width: 540px;
+  max-width: 520px;
 }
 
 .page.active {
   display: block;
 }
 
-/* Card (kept above hearts) */
+/* Card */
 .card {
   position: relative;
-  z-index: 10;
-  border-radius: 22px;
+  z-index: 10; /* ABOVE hearts */
+  background: rgba(0, 0, 0, 0.85);
+  border: 2px solid rgba(255, 105, 180, 0.55);
+  box-shadow: 0px 0px 40px rgba(255, 105, 180, 0.25);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
   padding: 28px;
   text-align: center;
-  box-shadow: 0px 0px 50px rgba(255, 105, 180, 0.25);
-}
-
-/* ✅ Vibrant card design (your request) */
-.card-vibrant {
-  background: linear-gradient(135deg, rgba(255, 105, 180, 0.85), rgba(255, 0, 128, 0.55));
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(8px);
 }
 
 /* Titles */
 .title {
   font-size: 2rem;
   margin-bottom: 15px;
-  color: white;
 }
 
+/* Question */
 #question {
   font-size: 2rem;
   margin-bottom: 25px;
-  color: white;
 }
 
 /* Message */
@@ -102,7 +102,6 @@ body {
   font-size: 1.2rem;
   line-height: 1.5;
   margin: 15px 0 20px;
-  color: white;
 }
 
 /* Buttons */
@@ -120,13 +119,12 @@ body {
 }
 
 .yes {
-  background: white;
-  color: #ff2f7d;
-  font-weight: bold;
+  background: hotpink;
+  color: white;
 }
 
 .no {
-  background: #222;
+  background: #444;
   color: white;
   position: absolute;
   left: 160px;
@@ -134,18 +132,16 @@ body {
 }
 
 .next {
-  background: #ff2f7d;
+  background: #ff69b4;
   color: white;
-  font-weight: bold;
 }
 
 .gift {
-  background: #ff006a;
+  background: #ff2f7d;
   color: white;
-  font-weight: bold;
 }
 
-/* Button area (NO button stays inside) */
+/* Button area (NO button stays inside here) */
 .btn-area {
   position: relative;
   width: 100%;
@@ -181,10 +177,9 @@ body {
   font-size: 1.05rem;
   line-height: 1.6;
   margin-top: 12px;
-  color: white;
+  color: pink;
 }
 
-/* Final Buttons */
 .final-buttons {
   margin-top: 20px;
   text-align: center;
@@ -193,5 +188,5 @@ body {
 .forever-text {
   margin-bottom: 12px;
   font-size: 1.1rem;
-  color: #ffe3f1;
+  color: #ffd1e8;
 }
