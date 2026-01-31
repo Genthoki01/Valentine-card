@@ -1,1 +1,170 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", Arial, sans-serif;
+}
 
+body{
+  overflow: hidden;
+  background: black;
+}
+
+/* 💗 Hearts background layer (UNDER card) */
+#heartsLayer{
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-heart{
+  position: absolute;
+  bottom: -40px;
+  opacity: 1;
+  animation: floatUp 6s linear forwards;
+}
+
+@keyframes floatUp{
+  from { transform: translateY(0) scale(1); opacity: 1; }
+  to   { transform: translateY(-120vh) scale(1.3); opacity: 0; }
+}
+
+/* App */
+#app{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  position: relative;
+  z-index: 5;
+}
+
+/* Pages */
+.page{
+  display: none;
+  width: 100%;
+  max-width: 520px;
+}
+
+.page.active{
+  display: block;
+}
+
+/* Vibrant card */
+.card{
+  padding: 35px 25px;
+  border-radius: 26px;
+  text-align: center;
+  position: relative;
+  z-index: 10; /* CARD ABOVE HEARTS */
+}
+
+.card-vibrant{
+  background: linear-gradient(135deg, #ff4da6, #ff2f7d, #ff80bf);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0px 0px 60px rgba(255, 0, 128, 0.35);
+}
+
+/* Text */
+.title{
+  font-size: 34px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 12px;
+  text-shadow: 0px 4px 12px rgba(0,0,0,0.35);
+}
+
+.subtitle{
+  font-size: 18px;
+  color: rgba(255,255,255,0.95);
+  margin-bottom: 18px;
+}
+
+.message{
+  font-size: 20px;
+  margin: 18px 0;
+  color: white;
+  line-height: 1.5;
+}
+
+/* Buttons */
+.btn-area{
+  position: relative;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.btn{
+  border: none;
+  cursor: pointer;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.btn:hover{
+  transform: scale(1.05);
+}
+
+.yes{
+  background: white;
+  color: #ff2f7d;
+}
+
+.no{
+  background: rgba(0,0,0,0.35);
+  color: white;
+  position: absolute;
+}
+
+.next{
+  background: white;
+  color: #ff2f7d;
+}
+
+/* Gift */
+.gift{
+  margin-top: 18px;
+}
+
+.gift-icon{
+  font-size: 80px;
+  margin: 10px 0;
+}
+
+.hidden{
+  display: none;
+}
+
+/* Letter */
+.letter-card{
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.letter{
+  text-align: left;
+  background: rgba(0,0,0,0.25);
+  padding: 18px;
+  border-radius: 18px;
+  color: white;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.final-buttons{
+  margin-top: 18px;
+}
+
+.forever-text{
+  margin-bottom: 10px;
+}
