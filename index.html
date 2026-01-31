@@ -1,1 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine Card 💖</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- 💗 Hearts Background (UNDER card) -->
+  <div id="heartsLayer"></div>
+
+  <div id="app" class="theme-black">
+
+    <!-- PAGE 1 -->
+    <div class="page active" id="page1">
+      <div class="card card-vibrant">
+        <h1 class="title">Will you be my Valentine? 💘</h1>
+        <p class="subtitle">Be honest 😌💗</p>
+
+        <div id="btnArea" class="btn-area">
+          <button id="yesBtn" class="btn yes">Yes 💖</button>
+          <button id="noBtn" class="btn no">No 😭</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page" id="page2">
+      <div class="card card-vibrant">
+        <h1 class="title" id="page2Title">To My Babe Rajat 💖💖💖</h1>
+        <p id="message" class="message"></p>
+        <button id="nextBtn" class="btn next">Next 💌</button>
+      </div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page" id="page3">
+      <div class="card card-vibrant">
+        <h1 class="title">One last thing... 🎁</h1>
+        <p class="subtitle">Click to open your gift 💝</p>
+
+        <button id="giftBtn" class="btn next">Open Gift 🎁</button>
+
+        <div id="giftBox" class="gift hidden">
+          <div class="gift-icon">🎁</div>
+          <button id="openLetterBtn" class="btn next">Open Love Letter 💌</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 4 -->
+    <div class="page" id="page4">
+      <div class="card card-vibrant letter-card">
+        <h1 class="title">Here a Something Special fot You 🤭🤭💌</h1>
+
+        <div id="letterText" class="letter"></div>
+
+        <div id="finalButtons" class="final-buttons">
+          <p class="subtitle forever-text">Will you be mine forever? 💍💖</p>
+          <button id="foreverYes" class="btn yes">YES 💖</button>
+          <button id="foreverNo" class="btn no">No 😭</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 5 -->
+    <div class="page" id="page5">
+      <div class="card card-vibrant">
+        <h1 class="title">My Dumbo!!! 💖✨</h1>
+        <p class="subtitle">Happy Valentine’s Day my love 💝</p>
+        <p class="subtitle">I love you forever ♾️💗</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
